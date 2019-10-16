@@ -36,12 +36,6 @@ int main(int argc, char *argv[])
 
 		findToken = strtok(pipeInput, delimiter);
 
-		/*if (findToken == NULL)
-		{
-			printf("Error: missing command\n");
-			continue;
-		}*/
-
 		Comm[0] = findToken;
 
 		while(1)
@@ -50,7 +44,7 @@ int main(int argc, char *argv[])
 			if ( findToken == NULL )
 				break;
 			Comm[++numPipes] = findToken;
-		}
+		} //Finds number of pipes
 
 		struct CommandLineParse* AllCommands = (struct CommandLineParse*)malloc(numPipes * sizeof(CommandLineParse));
 
@@ -62,7 +56,7 @@ int main(int argc, char *argv[])
 		if (AllCommands[0].valid == 1) {
 			free(AllCommands);
 			continue;
-		}
+		} //If any errors happened in parsing, starts process over
 
 		pid_t pid;
 		pid_t pipeId;
@@ -81,16 +75,12 @@ int main(int argc, char *argv[])
 				free(AllCommands);
 				continue;
 			}
-		}
+		} //Exit and CD before fork()
 
 		int currPipe = 0;
 		int Pipes = 0;
 
-		//if(numPipes != 0)
-		//{
-			Pipes = numPipes;
-			//numPipes--;
-		//}
+		Pipes = numPipes;
 
 		struct CommandLineParse Commands = AllCommands[currPipe];
 

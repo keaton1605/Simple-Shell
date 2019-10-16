@@ -11,4 +11,4 @@ sshell.o: sshell.c CommandLineParse.h
 	gcc -c -Wall -Werror sshell.c -o sshell.o 
 
 clean: 
-	rm *.o
+	rm *.o sshell

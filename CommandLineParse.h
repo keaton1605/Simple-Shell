@@ -5,7 +5,6 @@ typedef struct CommandLineParse
 {
 	char* Command;
 	char* args[15];
-	char specialChar[16];
 	int inRedirects;
 	int outRedirects;
 	int numPipes;

@@ -32,7 +32,7 @@ struct CommandLineParse ParseCommandLine (char* input)
 	{	
 		newToken = strtok(NULL, delimiter);
 		ARGS++;		
-	}
+	} //Determines number of arguments in each command
 
 	Parse.numArgs = ARGS;
 
@@ -50,12 +50,13 @@ struct CommandLineParse ParseCommandLine (char* input)
 					Parse.valid = 1;
 					printf("Error: missing command\n");
 					return Parse;
-				}		
+				} //Output redirection error handling
 
 				if (strlen(string) != 0)
 					++argNum;
 				Parse.outRedirects = argNum;
-				string[0] = '\0';
+				string[0] = '\0'; 
+				
 
 			} else if (input2[j] == '<') {
 				if (argNum == Parse.numArgs ) {
@@ -68,7 +69,7 @@ struct CommandLineParse ParseCommandLine (char* input)
 					Parse.valid = 1;
 					printf("Error: missing command\n");
 					return Parse;
-				}
+				} //Input redirection error handling
 
 				if (strlen(string) != 0)
 					++argNum;
@@ -89,10 +90,10 @@ struct CommandLineParse ParseCommandLine (char* input)
 					Parse.valid = 1;
 					printf("Error: mislocated background sign\n");
 					return Parse;
-				}				
+				} //Background Task redirection error handling				
 			} else {
 				strncat(string, &input2[j], 1);
-			}
+			} //Determines special character location
 
 		} else {
 			if (strlen(string) == 0) {
@@ -103,10 +104,10 @@ struct CommandLineParse ParseCommandLine (char* input)
 			} else {
 				argNum++;
 				string[0] = '\0';
-			}
+			} //Skips extra white space
 		}
 		++j;
-	}
+	} //Iterates through all characters in the command
 
 	char* findToken;
 	int i = 0;
@@ -128,8 +129,8 @@ struct CommandLineParse ParseCommandLine (char* input)
 			Parse.valid = 1;
 			return Parse;
 		}
-	}
+	} //Parses each argument seperated by white space or special chars
 
 	return Parse;
 
-}
+} 
